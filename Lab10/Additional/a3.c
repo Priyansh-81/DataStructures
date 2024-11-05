@@ -31,14 +31,13 @@ node* copyTree(node* root) {
     return temp;
 }
 
-void buildTree(node** root) {
+void buildTree(node* root) {
     int n, info;
     printf("Enter number of nodes: ");
     scanf("%d", &n);
-    printf("Enter node values:\n");
     for (int i = 0; i < n; i++) {
         scanf("%d", &info);
-        *root = insert(*root, info);
+        root = insert(root, info);
     }
 }
 
@@ -55,7 +54,14 @@ int main() {
     node* tree2 = NULL;
 
     printf("Build original tree:\n");
-    buildTree(&tree1);
+    int n;
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++) {
+        int info;
+        scanf("%d", &info);
+        tree1 = insert(tree1, info);
+    }
 
     tree2 = copyTree(tree1);
 
