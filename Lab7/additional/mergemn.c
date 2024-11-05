@@ -76,3 +76,60 @@ void traverse(node* start){
     }
     printf("\n");
 }
+
+node* merge(node* start1, node* start2) {
+    node *start3 = NULL, *last = NULL;
+    node *cur1 = start1;
+    node *cur2 = start2;
+
+    // Alternate nodes from both lists until one list is exhausted
+    while (cur1 != NULL && cur2 != NULL) {
+        // Add a node from list1
+        node* temp1 = (node*)malloc(sizeof(node));
+        temp1->info = cur1->info;
+        temp1->next = NULL;
+
+        if (start3 == NULL) {
+            start3 = temp1;
+            last = start3;
+        } else {
+            last->next = temp1;
+            last = temp1;
+        }
+        cur1 = cur1->next;
+
+        // Add a node from list2
+        node* temp2 = (node*)malloc(sizeof(node));
+        temp2->info = cur2->info;
+        temp2->next = NULL;
+
+        last->next = temp2;
+        last = temp2;
+
+        cur2 = cur2->next;
+    }
+
+    // If list1 has remaining nodes, add them
+    while (cur1 != NULL) {
+        node* temp = (node*)malloc(sizeof(node));
+        temp->info = cur1->info;
+        temp->next = NULL;
+
+        last->next = temp;
+        last = temp;
+        cur1 = cur1->next;
+    }
+
+    // If list2 has remaining nodes, add them
+    while (cur2 != NULL) {
+        node* temp = (node*)malloc(sizeof(node));
+        temp->info = cur2->info;
+        temp->next = NULL;
+
+        last->next = temp;
+        last = temp;
+        cur2 = cur2->next;
+    }
+
+    return start3;
+}
